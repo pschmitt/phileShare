@@ -75,11 +75,6 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
         } else {
             $twig_vars = array();
         }
-        // var_dump($twig_vars);
-
-        // $pageTitle = $twig_vars['current_page']['title'];
-        // $pageURL = $twig_vars['current_page']['url'];
-        // $pageExcerpt = $twig_vars['current_page']['excerpt'];
         $activeServices = array();
 
         foreach($this->services as $key => $value) {

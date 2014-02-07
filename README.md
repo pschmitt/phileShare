@@ -37,8 +37,9 @@ $config['plugins'] = array(
 `$config['share_services'] = array('twitter' => true, 'facebook' => true, 'google' => true, 'linkedin' => false);`
 **output** - select how services will be displayed. _**default**_: link. _**options**_: list | link  
 `$config['share_output'] = 'link';`  
-**class_prefix** - add class(es) to `a` tags. by default, every service will have a `btn-service` class. _**default**_: btn-  
+**class_prefix** - add class(es) to `a` tags. by default, every service will have a `btn-service` class. _**default**_: btn- 
 `$config['share_class_prefix'] = 'btn-';`  
+**share_class_prefix** - The ID of the generated share div (if opting for link output) or the list (list ouput)
 
 ## Setting up the theme
 
