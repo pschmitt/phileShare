@@ -16,7 +16,7 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
             'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=__URL__',
             'google' => 'https://plus.google.com/share?url=__URL__',
             'linkedin' => 'http://www.linkedin.com/shareArticle?mini=true&url=__URL__&title=__TITLE__&summary=__EXCERPT__&source=__URL__'
-        );
+    );
 
     private $config;
     private $class_prefix;
@@ -24,18 +24,16 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
     private $services;
     private $share_div_id;
 
-    private $test = 'before_parse_content';
-
     public function __construct() {
         \Phile\Event::registerEvent('config_loaded', $this);
-        \Phile\Event::registerEvent($this->test, $this);
+        \Phile\Event::registerEvent('before_parse_content', $this);
         $this->config = \Phile\Registry::get('Phile_Settings');
     }
 
     public function on($eventKey, $data = null) {
         if ($eventKey == 'config_loaded') {
             $this->config_loaded();
-        } else if ($eventKey == $this->test) {
+        } else if ($eventKey == 'before_parse_content') {
             $title = $data['page']->getTitle();
             $description = $data['page']->getMeta()->get('description');
             $relative_uri = $data['page']->getUrl();
