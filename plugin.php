@@ -12,10 +12,10 @@
 class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObserverInterface {
 
     private $templates = array(
-            'twitter' => 'https://twitter.com/intent/tweet?text=__TITLE__&url=__URL__',
+            'twitter' => 'https://twitter.com/intent/tweet?text=__TITLE__&amp;url=__URL__',
             'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=__URL__',
             'google' => 'https://plus.google.com/share?url=__URL__',
-            'linkedin' => 'http://www.linkedin.com/shareArticle?mini=true&url=__URL__&title=__TITLE__&summary=__EXCERPT__&source=__URL__'
+            'linkedin' => 'http://www.linkedin.com/shareArticle?mini=true&amp;url=__URL__&amp;title=__TITLE__&amp;summary=__EXCERPT__&amp;source=__URL__'
     );
 
     private $config;
@@ -34,8 +34,8 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
         if ($eventKey == 'config_loaded') {
             $this->config_loaded();
         } else if ($eventKey == 'before_parse_content') {
-            $title = $data['page']->getTitle();
-            $description = $data['page']->getMeta()->get('description');
+            $title = rawurlencode($data['page']->getTitle());
+            $description = rawurlencode($data['page']->getMeta()->get('description'));
             $relative_uri = $data['page']->getUrl();
             $this->export_twig_vars($title, $description, $relative_uri);
         }
