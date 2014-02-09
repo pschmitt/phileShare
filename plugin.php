@@ -12,9 +12,9 @@
 class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObserverInterface {
 
     private $templates = array(
-            'twitter' => 'https://twitter.com/intent/tweet?text=__TITLE__&amp;url=__URL__',
+            'twitter'  => 'https://twitter.com/intent/tweet?text=__TITLE__&amp;url=__URL__',
             'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=__URL__',
-            'google' => 'https://plus.google.com/share?url=__URL__',
+            'google'   => 'https://plus.google.com/share?url=__URL__',
             'linkedin' => 'http://www.linkedin.com/shareArticle?mini=true&amp;url=__URL__&amp;title=__TITLE__&amp;summary=__EXCERPT__&amp;source=__URL__'
     );
 
@@ -81,12 +81,12 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
             }
         }
         switch($this->output) {
-            case 'link':
-                $twig_vars['social_share'] = '<div id="' . $this->share_div_id . '">'.implode('', array_values($activeServices)).'</div>';
+            case 'list':
+                $twig_vars['social_share'] = '<ul id="' . $this->share_div_id . '"><li>'.implode('</li><li>', array_values($activeServices)).'</li></ul>';
                 break;
             default:
-                //show as list by default
-                $twig_vars['social_share'] = '<ul id="' . $this->share_div_id . '"><li>'.implode('</li><li>', array_values($activeServices)).'</li></ul>';
+                //show as link by default
+                $twig_vars['social_share'] = '<div id="' . $this->share_div_id . '">'.implode('', array_values($activeServices)).'</div>';
                 break;
         }
         \Phile\Registry::set('templateVars', $twig_vars);
