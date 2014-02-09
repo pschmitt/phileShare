@@ -28,6 +28,12 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
         \Phile\Event::registerEvent('config_loaded', $this);
         \Phile\Event::registerEvent('before_parse_content', $this);
         $this->config = \Phile\Registry::get('Phile_Settings');
+        
+        // init - default values
+        $this->services = array('twitter' => true, 'facebook' => true, 'google' => true, 'linkedin' => true);
+        $this->output = 'link';
+        $this->class_prefix = 'btn-';
+        $this->share_div_id = 'share';
     }
 
     public function on($eventKey, $data = null) {
@@ -47,23 +53,15 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
         $this->config = array_merge($this->settings, $this->config);
         if (isset($this->config['share_services'])) {
             $this->services = $this->config['share_services'];
-        } else {
-            $this->services = array('twitter' => true, 'facebook' => true, 'google' => true, 'linkedin' => true);
         }
         if (isset($this->config['share_output'])) {
             $this->output = $this->config['share_output'];
-        } else {
-            $this->output = 'link';
         }
         if (isset($this->config['share_class_prefix'])) {
             $this->class_prefix = $this->config['share_class_prefix'];
-        } else {
-            $this->class_prefix = 'btn-';
         }
         if (isset($this->config['share_div_id'])) {
             $this->share_div_id = $this->config['share_div_id'];
-        } else {
-            $this->share_div_id = 'share';
         }
     }
 
