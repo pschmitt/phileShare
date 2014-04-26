@@ -1,5 +1,7 @@
 <?php
 
+namespace Phile\Plugin\Pschmitt\Share;
+
 /**
  * Social plugin for Phile CMS
  * Adds social media buttons to posts and pages
@@ -7,9 +9,12 @@
  *
  * @author Philipp Schmitt
  * @link http://lxl.io
+ * @link https://github.com/pschmitt/phileShare
  * @license http://opensource.org/licenses/MIT
+ * @package Phile\Plugin\Pschmitt\Share
  */
-class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObserverInterface {
+
+class Plugin extends \Phile\Plugin\AbstractPlugin implements \Phile\Gateway\EventObserverInterface {
 
     private $templates = array(
             'twitter'  => 'https://twitter.com/intent/tweet?text=__TITLE__&amp;url=__URL__',
@@ -28,7 +33,7 @@ class PhileShare extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObs
         \Phile\Event::registerEvent('config_loaded', $this);
         \Phile\Event::registerEvent('before_parse_content', $this);
         $this->config = \Phile\Registry::get('Phile_Settings');
-        
+
         // init - default values
         $this->services = array('twitter' => true, 'facebook' => true, 'google' => true, 'linkedin' => true);
         $this->output = 'link';
